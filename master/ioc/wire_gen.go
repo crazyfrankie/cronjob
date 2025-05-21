@@ -8,6 +8,7 @@ package ioc
 
 import (
 	"context"
+	"github.com/crazyfrankie/cronjob/master/conf"
 	"github.com/crazyfrankie/cronjob/master/handler"
 	"github.com/crazyfrankie/cronjob/master/service"
 	"github.com/gin-gonic/gin"
@@ -35,8 +36,8 @@ func InitServer() *gin.Engine {
 
 func InitETCD() *clientv3.Client {
 	client, err := clientv3.New(clientv3.Config{
-		Endpoints:   []string{""},
-		DialTimeout: time.Second * 2,
+		Endpoints:   conf.GetConf().ETCD.Endpoint,
+		DialTimeout: time.Duration(conf.GetConf().ETCD.ConnectTimeOut),
 	})
 	if err != nil {
 		panic(err)
@@ -48,8 +49,8 @@ func InitETCD() *clientv3.Client {
 func InitMongo() *mongo.Database {
 	monitor := &event.CommandMonitor{}
 
-	opt := options.Client().ApplyURI("mongodb://localhost:27017").
-		SetMonitor(monitor)
+	opt := options.Client().ApplyURI(conf.GetConf().Mongo.URI).
+		SetMonitor(monitor).SetConnectTimeout(time.Duration(conf.GetConf().ETCD.ConnectTimeOut))
 	client, err := mongo.Connect(opt)
 	if err != nil {
 		panic(err)

@@ -1,0 +1,11 @@
+server:
+  port: :8083
+
+mongo:
+  uri: mongodb://localhost:27017
+  connectTimeout: 2
+
+etcd:
+  endpoint:
+    - localhost:2379
+  connectTimeOut: 2
