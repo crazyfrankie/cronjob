@@ -29,24 +29,70 @@ func NewJobHandler(job *service.JobService, log *service.LogService, worker *ser
 func (h *JobHandler) RegisterRoute(r *gin.Engine) {
 	jobGroup := r.Group("api/job")
 	{
-		jobGroup.POST("", h.CreateJob())
-		jobGroup.DELETE("delete")
-		jobGroup.GET("")
-		jobGroup.DELETE("kill")
-		jobGroup.POST("", h.CreateJob())
+		jobGroup.POST("", h.SaveJob())
+		jobGroup.DELETE("delete", h.DeleteJob())
+		jobGroup.GET("", h.GetJobList())
+		jobGroup.DELETE("kill", h.KillJob())
 		jobGroup.GET("logs", h.GetJobLogs())
-		jobGroup.GET("workers")
+		jobGroup.GET("workers", h.GetWorkerList())
 	}
 }
 
-func (h *JobHandler) CreateJob() gin.HandlerFunc {
+func (h *JobHandler) SaveJob() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var createReq req.CreateJobReq
+		var createReq req.Job
 		if err := c.ShouldBind(&createReq); err != nil {
 			response.Error(c, http.StatusBadRequest, gerrors.NewBizError(20001, "bind error "+err.Error()))
 			return
 		}
 
+		err := h.jobSvc.SaveJob(c.Request.Context(), &createReq)
+		if err != nil {
+			response.Error(c, http.StatusInternalServerError, gerrors.NewBizError(30000, err.Error()))
+			return
+		}
+
+		response.Success(c)
+	}
+}
+
+func (h *JobHandler) DeleteJob() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		name := c.Query("name")
+
+		err := h.jobSvc.DeleteJob(c.Request.Context(), name)
+		if err != nil {
+			response.Error(c, http.StatusInternalServerError, gerrors.NewBizError(30000, err.Error()))
+			return
+		}
+
+		response.Success(c)
+	}
+}
+
+func (h *JobHandler) GetJobList() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		res, err := h.jobSvc.GetJobList(c.Request.Context())
+		if err != nil {
+			response.Error(c, http.StatusInternalServerError, gerrors.NewBizError(30000, err.Error()))
+			return
+		}
+
+		response.SuccessWithData(c, res)
+	}
+}
+
+func (h *JobHandler) KillJob() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		name := c.Query("name")
+
+		err := h.jobSvc.KillJob(c.Request.Context(), name)
+		if err != nil {
+			response.Error(c, http.StatusInternalServerError, gerrors.NewBizError(30000, err.Error()))
+			return
+		}
+
+		response.Success(c)
 	}
 }
 
