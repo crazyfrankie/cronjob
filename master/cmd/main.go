@@ -22,10 +22,10 @@ func main() {
 		Handler: engine,
 	}
 
+	log.Printf("Server is running at http://localhost:%s", conf.GetConf().Server.Port)
 	if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Printf("failed start server")
 	}
-	log.Printf("Server is running at http://localhost:%s", conf.GetConf().Server.Port)
 
 	quit := make(chan os.Signal)
 

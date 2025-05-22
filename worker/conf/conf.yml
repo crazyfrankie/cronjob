@@ -1,9 +1,8 @@
-server:
-  port: :8085
-
 mongo:
   uri: mongodb://localhost:27017
   connectTimeout: 5
+  logCommitTimeout: 1
+  logBatchSize: 100
 
 etcd:
   endpoint:

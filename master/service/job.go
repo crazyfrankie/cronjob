@@ -6,8 +6,8 @@ import (
 	"github.com/bytedance/sonic"
 	clientv3 "go.etcd.io/etcd/client/v3"
 
-	"github.com/crazyfrankie/cronjob/common/consts"
-	"github.com/crazyfrankie/cronjob/common/model/req"
+	"github.com/crazyfrankie/cronjob/pkg/consts"
+	"github.com/crazyfrankie/cronjob/pkg/model"
 )
 
 type JobService struct {
@@ -18,7 +18,7 @@ func NewJobService(client *clientv3.Client) *JobService {
 	return &JobService{client: client}
 }
 
-func (s *JobService) SaveJob(ctx context.Context, job *req.Job) error {
+func (s *JobService) SaveJob(ctx context.Context, job *model.Job) error {
 	key := consts.JobSaveDir + job.Name
 
 	data, err := sonic.Marshal(job)
@@ -40,14 +40,14 @@ func (s *JobService) DeleteJob(ctx context.Context, name string) error {
 	return err
 }
 
-func (s *JobService) GetJobList(ctx context.Context) ([]req.Job, error) {
+func (s *JobService) GetJobList(ctx context.Context) ([]model.Job, error) {
 	res, err := s.client.Get(ctx, consts.JobSaveDir, clientv3.WithPrefix())
 	if err != nil {
 		return nil, err
 	}
-	jobs := make([]req.Job, 0, len(res.Kvs))
+	jobs := make([]model.Job, 0, len(res.Kvs))
 	for _, kv := range res.Kvs {
-		var job req.Job
+		var job model.Job
 		if err := sonic.Unmarshal(kv.Value, &job); err != nil {
 			continue
 		}

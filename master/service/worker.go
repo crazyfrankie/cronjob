@@ -6,7 +6,7 @@ import (
 
 	"go.etcd.io/etcd/client/v3"
 
-	"github.com/crazyfrankie/cronjob/common/consts"
+	"github.com/crazyfrankie/cronjob/pkg/consts"
 )
 
 type WorkerService struct {

@@ -50,7 +50,9 @@ func InitMongo() *mongo.Database {
 	monitor := &event.CommandMonitor{}
 
 	opt := options.Client().ApplyURI(conf.GetConf().Mongo.URI).
-		SetMonitor(monitor).SetConnectTimeout(time.Duration(conf.GetConf().ETCD.ConnectTimeOut))
+		SetMonitor(monitor).
+		SetConnectTimeout(time.Duration(conf.GetConf().Mongo.ConnectTimeOut) * time.Second).
+		SetServerSelectionTimeout(5 * time.Second)
 	client, err := mongo.Connect(opt)
 	if err != nil {
 		panic(err)
@@ -69,7 +71,8 @@ func InitMongoCollections(db *mongo.Database) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 
-	if err := db.CreateCollection(ctx, "cron_job_logs"); err != nil {
+	err := db.CreateCollection(ctx, "cron_job_logs")
+	if err != nil {
 		return err
 	}
 
