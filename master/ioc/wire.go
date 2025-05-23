@@ -4,16 +4,18 @@ package ioc
 
 import (
 	"context"
-	"github.com/crazyfrankie/cronjob/master/conf"
 	"time"
 
-	"github.com/gin-gonic/gin"
-	"github.com/google/wire"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.mongodb.org/mongo-driver/v2/event"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+	"github.com/google/wire"
+
+	"github.com/crazyfrankie/cronjob/master/conf"
 	"github.com/crazyfrankie/cronjob/master/handler"
 	"github.com/crazyfrankie/cronjob/master/service"
 )
@@ -65,7 +67,14 @@ func InitMongoCollections(db *mongo.Database) error {
 
 func InitGin(job *handler.JobHandler) *gin.Engine {
 	srv := gin.Default()
-
+	srv.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:8087"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "x-requested-with"},
+		ExposeHeaders:    []string{"Content-Length", "x-jwt-token", "x-refresh-token"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 	job.RegisterRoute(srv)
 
 	return srv

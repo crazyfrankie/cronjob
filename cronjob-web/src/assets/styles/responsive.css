@@ -1,0 +1,166 @@
+/* 响应式布局优化 */
+/* 添加默认响应式布局 */
+.el-table {
+  width: 100%;
+}
+
+.main-container {
+  min-width: 0; /* 允许容器缩小到小于内容宽度 */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  min-width: 0; /* 允许内容区域缩小 */
+}
+
+/* 修复表格行动列位置 */
+.el-table__fixed-right {
+  height: auto !important; /* 修复右侧固定列高度问题 */
+}
+
+@media (max-width: 1200px) {
+  .metrics-row .metric-card {
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  /* 改善表格在中等屏幕上的显示 */
+  .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 992px) {
+  .page-container {
+    padding: 15px;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+  }
+  
+  .chart-container {
+    height: 250px;
+  }
+  
+  .worker-card {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .page-header .el-button {
+    margin-top: 15px;
+  }
+  
+  .metrics-row {
+    margin-top: 15px;
+  }
+  
+  .metrics-row .el-col {
+    width: 50%;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .worker-card .worker-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .worker-card .worker-footer .el-button {
+    margin: 5px 0;
+  }
+  
+  .log-table-card,
+  .job-table-card {
+    overflow-x: auto;
+  }
+  
+  .dialog-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .dialog-footer .el-button {
+    width: 100%;
+  }
+  
+  .form-group {
+    padding: 15px 10px;
+  }
+  
+  .filter-bar .el-form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-bar .el-form-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-container {
+    padding: 10px;
+  }
+  
+  .metrics-row .el-col {
+    width: 100%;
+  }
+  
+  .metric-card {
+    margin-bottom: 15px;
+  }
+  
+  .hide-on-mobile {
+    display: none;
+  }
+  
+  .search-bar {
+    flex-direction: column;
+  }
+  
+  .search-bar .el-input {
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+  
+  .log-detail-item,
+  .job-detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .detail-label {
+    margin-bottom: 5px;
+  }
+  
+  .worker-detail-drawer {
+    width: 90% !important;
+  }
+  
+  .el-pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

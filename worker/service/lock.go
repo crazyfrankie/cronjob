@@ -3,10 +3,11 @@ package service
 import (
 	"context"
 	"fmt"
-	"github.com/crazyfrankie/cronjob/pkg/consts"
 	"log"
 
 	clientv3 "go.etcd.io/etcd/client/v3"
+
+	"github.com/crazyfrankie/cronjob/pkg/consts"
 )
 
 type LockManager struct {

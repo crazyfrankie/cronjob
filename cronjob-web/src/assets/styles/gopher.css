@@ -1,0 +1,211 @@
+/* Gopher icons */
+
+@font-face {
+  font-family: 'Gopher Icons';
+  src: url('https://cdn.jsdelivr.net/npm/@gophericons/gopher-icons@1.0.0/fonts/gopher-icons.eot');
+  src: url('https://cdn.jsdelivr.net/npm/@gophericons/gopher-icons@1.0.0/fonts/gopher-icons.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/npm/@gophericons/gopher-icons@1.0.0/fonts/gopher-icons.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/npm/@gophericons/gopher-icons@1.0.0/fonts/gopher-icons.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/npm/@gophericons/gopher-icons@1.0.0/fonts/gopher-icons.ttf') format('truetype'),
+       url('https://cdn.jsdelivr.net/npm/@gophericons/gopher-icons@1.0.0/fonts/gopher-icons.svg#gopher-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.zcron-gopher-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.zcron-gopher-logo {
+  width: 100px;
+  height: 100px;
+}
+
+.zcron-gopher-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 10px;
+  color: var(--primary-color);
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Loading Animation */
+.loading-dot-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.loading-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  margin: 0 5px;
+  display: inline-block;
+}
+
+.loading-dot:nth-child(1) {
+  animation: loading 1.4s ease-in-out 0s infinite;
+}
+
+.loading-dot:nth-child(2) {
+  animation: loading 1.4s ease-in-out 0.2s infinite;
+}
+
+.loading-dot:nth-child(3) {
+  animation: loading 1.4s ease-in-out 0.4s infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+    background-color: var(--primary-hover);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Card hover effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover); 
+}
+
+/* Tooltip animations */
+.tooltip-trigger {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-content {
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-trigger:hover .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Dashboard widgets */
+.dashboard-widget {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.dashboard-widget-header {
+  padding: 15px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 500;
+}
+
+.dashboard-widget-body {
+  padding: 15px;
+}
+
+/* Animated buttons */
+.btn-pulse {
+  position: relative;
+}
+
+.btn-pulse::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 4px;
+  background: linear-gradient(
+    to right, 
+    var(--primary-color), 
+    var(--primary-hover), 
+    var(--primary-active)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.btn-pulse:hover::before {
+  opacity: 1;
+  animation: border-pulse 1.5s linear infinite;
+}
+
+@keyframes border-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

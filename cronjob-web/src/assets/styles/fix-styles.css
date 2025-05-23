@@ -1,0 +1,70 @@
+/* 修复布局和页脚问题的样式 */
+.el-main {
+  flex: 1;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 20px;
+}
+
+.el-footer {
+  border: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  position: relative;
+  z-index: 2;
+}
+
+.footer {
+  border: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  background: #fff;
+}
+
+/* 移除所有可能的边框和分隔线 */
+.el-container, .el-main, .el-header, .el-footer,
+.footer::before, .footer::after,
+.el-footer::before, .el-footer::after {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 彻底移除黑线 */
+.el-container * {
+  border-top: none !important;
+}
+
+/* 没有边框类 */
+.no-borders,
+.no-borders::before,
+.no-borders::after {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* 处理滚动条问题 */
+html, body {
+  overflow: hidden;
+}
+
+#app {
+  overflow: hidden;
+}
+
+.el-main {
+  overflow: visible !important;
+}
+
+/* 确保滚动区域只在content-wrapper */
+.content-wrapper {
+  height: calc(100vh - 64px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.el-footer {
+  min-height: 40px;
+}

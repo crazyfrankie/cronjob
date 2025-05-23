@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="64" cy="64" r="60" fill="#00ADD8" />
+  
+  <!-- Clock Face (Cron) -->
+  <circle cx="64" cy="64" r="50" fill="white" stroke="#333333" stroke-width="2" />
+  <circle cx="64" cy="64" r="3" fill="#333333" />
+  
+  <!-- Clock Hands -->
+  <line x1="64" y1="64" x2="64" y2="30" stroke="#333333" stroke-width="3" stroke-linecap="round" />
+  <line x1="64" y1="64" x2="88" y2="64" stroke="#333333" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Hour Markers -->
+  <line x1="64" y1="20" x2="64" y2="24" stroke="#333333" stroke-width="2" />
+  <line x1="108" y1="64" x2="104" y2="64" stroke="#333333" stroke-width="2" />
+  <line x1="64" y1="108" x2="64" y2="104" stroke="#333333" stroke-width="2" />
+  <line x1="20" y1="64" x2="24" y2="64" stroke="#333333" stroke-width="2" />
+  
+  <!-- Gopher Ears -->
+  <path d="M50 15C45 5 35 10 30 15C30 30 50 30 50 15Z" fill="#FFCB2D" />
+  <path d="M78 15C83 5 93 10 98 15C98 30 78 30 78 15Z" fill="#FFCB2D" />
+  
+  <!-- Gopher Eyes -->
+  <circle cx="45" cy="40" r="5" fill="#333333" />
+  <circle cx="83" cy="40" r="5" fill="#333333" />
+  
+  <!-- Small Highlight in Eyes -->
+  <circle cx="47" cy="38" r="2" fill="white" />
+  <circle cx="85" cy="38" r="2" fill="white" />
+</svg>

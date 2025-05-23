@@ -1,0 +1,159 @@
+/* Animated Loading Spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.loading-spinner:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid var(--primary-color);
+  border-color: var(--primary-color) transparent var(--primary-color) transparent;
+  animation: loading-spinner 1.2s linear infinite;
+}
+
+@keyframes loading-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 173, 216, 0.5);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 173, 216, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 173, 216, 0);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0% { transform: translateX(0) }
+  25% { transform: translateX(5px) }
+  50% { transform: translateX(-5px) }
+  75% { transform: translateX(5px) }
+  100% { transform: translateX(0) }
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Slide transitions */
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+/* Statistics card */
+.stat-card {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card .stat-icon {
+  font-size: 24px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0.8;
+}
+
+.stat-card .stat-value {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 15px 0 5px;
+}
+
+.stat-card .stat-label {
+  font-size: 14px;
+  color: #909399;
+}
+
+/* Timeline styles */
+.timeline-wrapper {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: var(--card-shadow);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 20px;
+  padding-left: 28px;
+}
+
+.timeline-item:before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background-color: var(--border-color);
+}
+
+.timeline-item:last-child:before {
+  height: 20px;
+}
+
+.timeline-item .timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.timeline-item .timeline-time {
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 5px;
+}
